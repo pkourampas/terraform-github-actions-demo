@@ -6,7 +6,7 @@ on:
       - 'main'
 
 jobs:
-  check-code:
+  Terraform:
     runs-on: ubuntu-latest
     defaults:
       run:

@@ -1,7 +1,6 @@
 variable "region" {
   type = string
   description = "Where your infrastructure will be provisioned (Virginia, Ohio, California, Oregon, Mumbai, Osaka, Seoul, Singapore, Sydney, Tokyo, Canada, Frankfurt, Ireland, London, Paris, Stockholm, Sao Paulo)"
-  default = "London"
 }
 
 variable "aws-region" {
@@ -26,3 +25,7 @@ variable "aws-region" {
     "Sao Paulo" = "sa-east-1"
   }
 }  
+
+variable "bucket-name" {
+  type = string
+}
