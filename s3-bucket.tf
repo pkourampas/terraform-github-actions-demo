@@ -1,3 +1,4 @@
+# Creates a S3 bucket
 resource "aws_s3_bucket" "my-bucket" {
   bucket = var.bucket-name
   force_destroy = true
@@ -8,14 +9,17 @@ resource "aws_s3_bucket" "my-bucket" {
   }
 }
 
-resource "aws_s3_object" "upload_index_file" {
-    bucket = var.bucket-name
-    key = var.bucket-name
-    source = "./uploads/index.html"
+# Creates a folder
+resource "aws_s3_object" "folder" {
+  bucket = aws_s3_bucket.my-bucket.id
+  key = "directory/"
+  source = "/dev/null"
 }
 
-resource "aws_s3_object" "upload_error_file" {
-    bucket = var.bucket-name
-    key = var.bucket-name
-    source = "./uploads/error.html"
+resource "aws_s3_object" "upload-files" {
+  bucket = aws_s3_bucket.my-bucket.id
+
+  for_each = fileset("./uploads", "*")
+  key = "${aws_s3_object.folder.key}/${each.value}" 
+  source = "./uploads/${each.value}"
 }
