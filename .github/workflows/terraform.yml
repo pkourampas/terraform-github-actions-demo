@@ -1,0 +1,57 @@
+name: "Terraform"
+run-name: ${{ github.actor }}
+on:
+  push:
+    paths:
+      - './'
+    branches:
+      - 'main'
+
+jobs:
+  check-code:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          node-version: '20.x'
+
+      # Install the selected version of Terraform cli
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: "1.7.3"
+
+      - name: Configure AWS credentials
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run:
+          echo "AWS credentials configured."
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+      
+      - name: Terraform Format
+        id: fmt
+        run: terraform fmt
+
+      - name: Terraform Validate
+        id: validate
+        # Run event if formatting fails 
+        if: success() || failure()             
+        run: terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        if : success()
+        run: terraform plan -var 'region=Canada'
+        env:
+          AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
