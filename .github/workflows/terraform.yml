@@ -48,7 +48,7 @@ jobs:
       - name: Terraform Plan
         id: plan
         if : success()
-        run: terraform plan -var 'region=${{ env.TF_Region }}' -var 'bucket-name=${{ env.TF_Bucket_name }}
+        run: terraform plan -var 'region=${{ env.TF_Region }}' -var 'bucket-name=${{ env.TF_Bucket_name }}'
         env:
           AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
