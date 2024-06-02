@@ -47,6 +47,7 @@ jobs:
 
       - name: Terraform Plan
         id: plan
+        # Run plan event only if validate success
         if : success()
         run: terraform plan -var 'region=${{ env.TF_Region }}' -var 'bucket-name=${{ env.TF_Bucket_name }}'
         env:
@@ -57,6 +58,7 @@ jobs:
 
       - name: Terraform Apply
         id: apply
+        # Run apply event if plan event success
         if: success()
         run: terraform apply -var 'region=${{ env.TF_Region }}' -var 'bucket-name=${{ env.TF_Bucket_name }}' --auto-approve
         env:
