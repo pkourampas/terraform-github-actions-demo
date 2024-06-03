@@ -1,15 +1,19 @@
 Table of Contents
 
 - [Introduction](#introduction)
+- [Overview](#Overview)
 - [Prerequisites](#prerequisites)
 - [Execution](#execution)
 
-<br>
 <br>
 
 # Introduction
 
 This repo is a Github actions demo which provisions a S3 bucket with a tree of a folder & files on AWS.
+
+<br>
+
+# Overview
 
 <br>
 
@@ -56,6 +60,8 @@ Now you just created a user without AWS console login access. Next step is to ge
 
 # Execution
 
-- Clone my repo 
-- Update the 
+- Fork my repository & update the hithub environmental variables with your Access Key & Secret Key.
+- GitHub USERNAME/REPOSITORY/Settings/Security/Secret and variables/Actions/[New repository secret](./attachments/Actions-secrrets%20and%20variables.png)
 
+
+Navigate on the **.github/workflows/terraform.yml** & **change the bucket name & region** push the changes to the remote. Then review the CI/CD progress by navigate on Actions on Github.
