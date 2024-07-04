@@ -15,6 +15,12 @@ This repo is a Github actions demo which provisions a S3 bucket with a tree of a
 
 # Overview
 
+You are going to deploy the following on your AWS Account.
+
+<br>
+
+![Alt text](./attachments/s3-bucket.drawio.png)
+
 <br>
 
 # Prerequisites
